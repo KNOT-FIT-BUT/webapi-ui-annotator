@@ -1,0 +1,8 @@
+div.ui.form
+    div.inline.fields
+        if model.tool_selected != null
+            each chstate,chname in model.tool_selected.switches
+                div.field
+                    div.ui.checkbox
+                        input(type="checkbox" name=chname checked=chstate)
+                        label=chname

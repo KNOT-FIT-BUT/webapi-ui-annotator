@@ -1,0 +1,72 @@
+mixin finalize(data)
+    |!{data.replace(/\\n/g, '<br />')}
+
+mixin gender(g)
+    case g
+        when "M"
+            ="Male"
+        when "F"
+            ="Female"
+        when "U"
+            ="Unknown"
+        when "O"
+            ="Others"
+
+mixin kbrowdata(column, data, dataplus, coref)
+    if dataplus != null && dataplus.hasOwnProperty(column)
+        - var dplus = dataplus[column];
+        case dplus.type
+            when "url"
+                a(href="#{dplus.data}#{data}" target="_blank")
+                    +finalize(data)
+            when "image"
+                a(href="#{dplus.data}#{data}" target="_blank")
+                    +finalize(data)
+            default
+                +finalize(data)
+    else
+        case column
+            when "type"
+                |#{data}
+                span(class="coref")
+            when "gender"
+                +gender(data)
+            default
+                if column.endsWith("url")
+                    a(href="#{data}" target="_blank")
+                        +finalize(data)
+                else
+                    +finalize(data)
+
+
+mixin kbrow(column, data, entity)
+    li
+        strong=column+":  "
+        if Array.isArray(data)
+            - var y
+            each d, i in data
+                +kbrowdata(column, d, entity.group_ref.dataPlus, entity.coref)
+                unless i == data.length-1
+                    ="; "
+        else
+           +kbrowdata(column, data, entity)
+
+div(id='rightTop')
+    div(id='entityInfoHeader' class='ui inverted teal menu')
+        div(class='title item')
+            i( class='info icon') 
+            |Textual Entity Information
+        div(class='icon menu right')
+            - var disabled = (model.entitySelected && model.entitySelected.others && model.entitySelected.others.length > 1) ? "" : "disabled";
+            a( class='item #{disabled}' data-hook="showBar")
+                i( class='list layout icon')
+
+
+    div(id='entityInfoContent')
+        if model.entitySelected != null && model.entitySelected.preferred != null
+            - var kbid =  preview || model.entitySelected.preferred
+            - var kb = model.entitySelected.kb_ref[kbid]
+            ul
+                each data, column in kb.data
+                    if data != "" && data != null
+                        +kbrow(column, data, model.entitySelected)

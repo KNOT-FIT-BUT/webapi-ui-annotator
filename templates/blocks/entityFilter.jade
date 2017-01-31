@@ -1,0 +1,22 @@
+div(class="ui flowing popup transition hidden" id="entityFilterPopup" style="top: 554px; left: 1px; bottom: auto; right: auto; width: 460px;")
+    div(class="ui center aligned")
+        div(class="ui labeled segment")
+            div(class="ui top left attached label") Filters
+            div(class="ui labels" data-hook="groupFilters")
+            div(class="ui bottom right attached label")
+                div.ui.small.basic.icon.buttons
+                    button(class="ui button" data-action="check_all")
+                        i.checkmark.box.icon
+                    button(class="ui button" data-action="toggle")
+                        i.refresh.icon
+                    button(class="ui button" data-action="uncheck_all")
+                        i.square.outline.icon
+
+
+
+        div(class="ui labeled segment")
+            div(class="ui top left attached label") Scope
+            div#filterScope
+                button(class="ui toggle button scope active" data-scope="editor") Editor
+                button(class="ui toggle button scope active" data-scope="entities") Entites
+

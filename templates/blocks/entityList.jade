@@ -1,0 +1,14 @@
+div(id="leftBottom")
+    div(id='entityListHeader' class='ui blue inverted menu')
+        div(class='title item')
+            i( class='list icon')
+            | Entities
+        div(class='icon menu right')
+            a( class='item' data-hook="button" data-action="sort")
+                i(class='icon' data-hook="sortIcon")
+            a( class='item' data-hook="button" data-action="filter")
+                i( class='filter icon')
+            a( class='item' data-hook="button" data-action="settings")
+                i( class='settings icon' )
+
+    div(id='entityListContent' data-hook='entityList')

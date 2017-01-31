@@ -1,0 +1,11 @@
+case model.type
+    when "text"
+        span(class="item") #{model.text}
+    when "item"
+        strong(class="item" data-id="#{model.id}") #{model.text}
+    default
+        |""
+
+
+
+

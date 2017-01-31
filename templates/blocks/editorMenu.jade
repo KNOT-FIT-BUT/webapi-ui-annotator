@@ -1,0 +1,41 @@
+div(id="previewMenu")
+    div(id='editorHeader')
+        div.ui.top.attached.menu
+            a( class='active item' data-tab='annotate')
+                i( class='lab icon')
+                |Annotate
+            a( class='item' data-tab='save')
+                i( class='save icon')
+                |Save
+            a( class='item' data-tab='manage')
+                i( class='content basic icon')
+                |Manage
+            div(class='right menu')
+                div.item Cursor position:
+                    div(data-hook="cursorPos") 0
+
+
+        div(class='ui active tab' data-tab='annotate')
+            div(class='ui small secondary menu')
+                a( class='item' data-hook="button" data-action="annotate") Annotate
+                a( class='item' data-hook="button" data-action="annotateSelection") Annotate Selected
+                a( class='item' data-hook="button" data-action="loadLocalFile")
+                    i( class='icon disk outline')
+                    |Local File
+                div(class='ui dropdown link item' data-hook='dropBase')
+                    i( class='cloud download icon')
+                    div(class='text') Example Files
+                    i( class='icon dropdown')
+                    div(data-hook='dropItems' class='menu')
+
+
+        div(class='ui tab' data-tab='save')
+            div(class='ui small secondary menu')
+                a( class='item' data-hook="button" data-action='saveJSON' data-arg='json') JSON
+                a( class='item' data-hook="button" data-action='saveXML' data-arg='xml') XML
+                a( class='item' data-hook="button" data-action='saveYAMLt' data-arg='yaml') YAML
+        div(class='ui tab' data-tab='manage')
+            div(class='ui small secondary menu')
+                a( class='item' data-hook="button" data-action='manageEntities') Entities
+                a( class='item' data-hook="button" data-action='showAssetManager') Assets &amp; Tools
+                a( class='item' data-hook="button" data-action='manageImages') Images

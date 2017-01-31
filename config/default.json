@@ -1,0 +1,19 @@
+{
+    "isDev": true,
+    "isSecure": false,
+    "session": {
+        "host": "147.229.190.142",
+        "port": 6379,
+        "db": 1,
+        "secret": "bang!",
+        "secure": false
+    },
+    "http": {
+        "listen": "147.229.190.142",
+        "port": 3000
+    },
+    "client": {
+        "apiUrl": "http://147.229.190.142:3000",
+        "debugMode": true
+    }
+}

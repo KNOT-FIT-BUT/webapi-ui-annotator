@@ -1,0 +1,25 @@
+div(data-hook="assetModal" class="ui large modal")
+    i.close.icon
+    div.header Asset Manager
+    div.content
+        div.ui.internally.celled.grid
+            div.row
+                div(class="eight wide column" data-hook="toolbox")
+
+                div.eight.wide.column
+                    div(class="ui labels" data-hook="assetbox")
+
+
+            div.row
+                div(class="eight wide column")
+                    div(data-hook="switches")
+
+                    p Version:
+                        span(data-hook="toolboxinfo")
+                div(class="eight wide column")
+                    div(data-hook="states")
+                    p Version:
+                        span(data-hook="assetboxinfo")
+
+    div.actions
+        div.ui.button#closeButton Close

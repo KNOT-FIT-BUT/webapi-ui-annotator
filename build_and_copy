@@ -1,0 +1,2 @@
+node --max-old-space-size=8192 moonboots-build.js
+cp -r ./build/* ../webapiner3/server/static3

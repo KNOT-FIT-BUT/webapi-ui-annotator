@@ -1,0 +1,34 @@
+body
+    div(data-hook="pageSidebar" id="pageSidebar" class="ui left very wide sidebar")
+    div(data-hook="pageSidebar2" id="pageSidebar2" class="ui right wide sidebar")
+    div(id="fixedHeader" class="ui top fixed inverted black main menu")
+        div(id="headerMenu" class="container")
+            div(class="title item")
+                b Decipher NERC
+            div(class="right menu")
+                a(class="popup icon item active" data-content="Preview Mode" data-type="nav"  href="/preview")
+                    i(class="unhide icon")
+                a(class="popup icon item" data-content="Annotation Mode" data-type="nav"  href="/annotator")
+                    i(class="edit icon")
+                a(class="popup icon item" data-content="Application Settings" data-type="nav" href="/settings")
+                    i(class="settings icon")
+
+    div(id="panelWrapper" class="ui transition pusher" data-hook="page-container")
+    div(id="pageDimmer" class="ui page dimmer")
+        div(class="content")
+            div(class="center")
+                div(class="ui text large loader") Loading...
+                    h2 Welcome! Graphical interface is about to loading!
+                    div(class="sub header") Please wait till its complete.
+
+
+    div(data-hook="pageModals")
+    div(data-hook="pagePopups")
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+editor.jade
+
+        if model.empty == false && false
+            - var t_start = 0
+            - var t_stop = 0
+            - var n = 0
+            while n < model.items.length
+                - var item = model.items.at(n++)
+                - var classData = ""
+                if item.entity != -1
+                    - classData+= model.entities.get(item.entity).group
+                if item.selected == true
+                    - classData+=" sel "
+                - t_stop = item.start
+                span(data-start="#{t_start}") #{model.sourceText.substring(t_start, t_stop)}
+                span(data-entity="#{item.entity}" data-tags="#{item.tags}" class="#{classData}") #{model.sourceText.substring(item.start, item.stop)}
+                - t_start = item.stop
+            span(data-start="#{t_start}") #{model.sourceText.substring(t_start)}
+        else
+            |#{model.sourceText}
+

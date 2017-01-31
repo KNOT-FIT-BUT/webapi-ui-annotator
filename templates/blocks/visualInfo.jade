@@ -1,0 +1,24 @@
+div(id='rightBottom')    
+    div(id='carouselHeader' class='ui green inverted menu ')
+        div(class='title item')
+            i( class='photo icon')
+            |Visual Entity Information
+        div(class='icon menu right')
+            a( class='item' title='a' data-hook='prevImage')
+                i( class='angle left icon')
+            div(id='imgCounter' class='item')
+                b(data-hook="counter") -/-
+
+            a( class='item' data-hook="nextImage")
+                i( class='angle right icon')
+
+    div(id='carouselContent' class='')
+        div(id='carouselImageList' class='' data-hook='carousel')
+            img(data-hook='carouselImg')
+
+        div.notFound.hidden
+            div.ui.center.aligned.icon.header
+                i.grey.huge.icons
+                    //i.big.dont.icon
+                    i.file.image.outline.icon
+                div.content 404 - Not Found
