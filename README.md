@@ -1,18 +1,16 @@
 # annotator
 
-This app was generated with the [ampersand cli tool](http://ampersandjs.com/learn/quick-start-guide).
+This is frontend SPA for webapiner server.
 
 ## How to run it
 
-1. download/install [node.js](http://nodejs.org/)
-1. install dependencies: `npm install`
-1. run it: `npm start`
-1. open http://localhost:3000 in a browser
+1. apt-get install nodejs npm git
+1. git clone this
+1. cd webapi3-ui-annotator
+1. npm i
 
-## How it's structured
-
-See docs: http://ampersandjs.com/
-Curated modules: http://tools.ampersandjs.com/
+## How to build
+ nodejs --max-old-space-size=8192 moonboots-build.js
 
 ## Credits
 
