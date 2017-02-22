@@ -12,10 +12,7 @@ This is frontend SPA for webapiner server.
 ## How to build
  nodejs --max-old-space-size=8192 moonboots-build.js
 
-## Credits
 
-Built by folks at [&yet](http://andyet.com).
 
 ## Want a deeper understanding?
-
-Get the book: http://humanjavascript.com
+Project is based on ampersandjs library. Get the book: http://humanjavascript.com or read docs at https://ampersandjs.com/.
