@@ -1,6 +1,8 @@
-exports.register = function (plugin, options, next) {        
+/*This file can be used for standalone development or testing without server backend*/
+
+exports.register = function (plugin, options, next) {
     // Tell Hapi to handle the public folder as a file directory
-    plugin.route({ 
+    plugin.route({
         method: 'GET',
         path: '/images/{param*}',
         handler: {directory: {path: 'public/images/'}}

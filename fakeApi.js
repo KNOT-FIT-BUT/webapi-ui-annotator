@@ -1,3 +1,4 @@
+/*This file can be used for standalone development or testing without server backend*/
 var _ = require('lodash');
 
 var people = [
