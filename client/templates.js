@@ -10,80 +10,13 @@
         root.templatizer = factory();
     }
 }(this, function () {
-    var jade = function () {
-        function n(n) {
-            return null != n && "" !== n
-        }
-
-        function t(e) {
-            return (Array.isArray(e) ? e.map(t) : e && "object" == typeof e ? Object.keys(e).filter(function (n) {
-                return e[n]
-            }) : [e]).filter(n).join(" ")
-        }
-
-        function e(n) {
-            return i[n] || n
-        }
-
-        function r(n) {
-            var t = String(n).replace(o, e);
-            return t === "" + n ? n : t
-        }
-
-        var a = {};
-        a.merge = function s(t, e) {
-            if (1 === arguments.length) {
-                for (var r = t[0], a = 1; a < t.length; a++)r = s(r, t[a]);
-                return r
-            }
-            var i = t["class"], o = e["class"];
-            (i || o) && (i = i || [], o = o || [], Array.isArray(i) || (i = [i]), Array.isArray(o) || (o = [o]), t["class"] = i.concat(o).filter(n));
-            for (var f in e)"class" != f && (t[f] = e[f]);
-            return t
-        }, a.joinClasses = t, a.cls = function (n, e) {
-            for (var r = [], i = 0; i < n.length; i++)e && e[i] ? r.push(a.escape(t([n[i]]))) : r.push(t(n[i]));
-            var o = t(r);
-            return o.length ? ' class="' + o + '"' : ""
-        }, a.style = function (n) {
-            return n && "object" == typeof n ? Object.keys(n).map(function (t) {
-                return t + ":" + n[t]
-            }).join(";") : n
-        }, a.attr = function (n, t, e, r) {
-            return "style" === n && (t = a.style(t)), "boolean" == typeof t || null == t ? t ? " " + (r ? n : n + '="' + n + '"') : "" : 0 == n.indexOf("data") && "string" != typeof t ? (-1 !== JSON.stringify(t).indexOf("&") && console.warn("Since Jade 2.0.0, ampersands (`&`) in data attributes will be escaped to `&amp;`"), t && "function" == typeof t.toISOString && console.warn("Jade will eliminate the double quotes around dates in ISO form after 2.0.0"), " " + n + "='" + JSON.stringify(t).replace(/'/g, "&apos;") + "'") : e ? (t && "function" == typeof t.toISOString && console.warn("Jade will stringify dates in ISO form after 2.0.0"), " " + n + '="' + a.escape(t) + '"') : (t && "function" == typeof t.toISOString && console.warn("Jade will stringify dates in ISO form after 2.0.0"), " " + n + '="' + t + '"')
-        }, a.attrs = function (n, e) {
-            var r = [], i = Object.keys(n);
-            if (i.length)for (var o = 0; o < i.length; ++o) {
-                var s = i[o], f = n[s];
-                "class" == s ? (f = t(f)) && r.push(" " + s + '="' + f + '"') : r.push(a.attr(s, f, !1, e))
-            }
-            return r.join("")
-        };
-        var i = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}, o = /[&<>"]/g;
-        return a.escape = r, a.rethrow = function f(n, t, e, r) {
-            if (!(n instanceof Error))throw n;
-            if (!("undefined" == typeof window && t || r))throw n.message += " on line " + e, n;
-            try {
-                r = r || require("fs").readFileSync(t, "utf8")
-            } catch (a) {
-                f(n, null, e)
-            }
-            var i = 3, o = r.split("\n"), s = Math.max(e - i, 0), l = Math.min(o.length, e + i), i = o.slice(s, l).map(function (n, t) {
-                var r = t + s + 1;
-                return (r == e ? "  > " : "    ") + r + "| " + n
-            }).join("\n");
-            throw n.path = t, n.message = (t || "Jade") + ":" + e + "\n" + i + "\n\n" + n.message, n
-        }, a.DebugItem = function (n, t) {
-            this.lineno = n, this.filename = t
-        }, a
-    }();
+    var jade=function(){function n(n){return null!=n&&""!==n}function t(e){return(Array.isArray(e)?e.map(t):e&&"object"==typeof e?Object.keys(e).filter(function(n){return e[n]}):[e]).filter(n).join(" ")}function e(n){return i[n]||n}function r(n){var t=String(n).replace(o,e);return t===""+n?n:t}var a={};a.merge=function t(e,r){if(1===arguments.length){for(var a=e[0],i=1;i<e.length;i++)a=t(a,e[i]);return a}var o=e.class,s=r.class;(o||s)&&(o=o||[],s=s||[],Array.isArray(o)||(o=[o]),Array.isArray(s)||(s=[s]),e.class=o.concat(s).filter(n));for(var f in r)"class"!=f&&(e[f]=r[f]);return e},a.joinClasses=t,a.cls=function(n,e){for(var r=[],i=0;i<n.length;i++)e&&e[i]?r.push(a.escape(t([n[i]]))):r.push(t(n[i]));var o=t(r);return o.length?' class="'+o+'"':""},a.style=function(n){return n&&"object"==typeof n?Object.keys(n).map(function(t){return t+":"+n[t]}).join(";"):n},a.attr=function(n,t,e,r){return"style"===n&&(t=a.style(t)),"boolean"==typeof t||null==t?t?" "+(r?n:n+'="'+n+'"'):"":0==n.indexOf("data")&&"string"!=typeof t?(JSON.stringify(t).indexOf("&")!==-1&&console.warn("Since Jade 2.0.0, ampersands (`&`) in data attributes will be escaped to `&amp;`"),t&&"function"==typeof t.toISOString&&console.warn("Jade will eliminate the double quotes around dates in ISO form after 2.0.0")," "+n+"='"+JSON.stringify(t).replace(/'/g,"&apos;")+"'"):e?(t&&"function"==typeof t.toISOString&&console.warn("Jade will stringify dates in ISO form after 2.0.0")," "+n+'="'+a.escape(t)+'"'):(t&&"function"==typeof t.toISOString&&console.warn("Jade will stringify dates in ISO form after 2.0.0")," "+n+'="'+t+'"')},a.attrs=function(n,e){var r=[],i=Object.keys(n);if(i.length)for(var o=0;o<i.length;++o){var s=i[o],f=n[s];"class"==s?(f=t(f))&&r.push(" "+s+'="'+f+'"'):r.push(a.attr(s,f,!1,e))}return r.join("")};var i={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"},o=/[&<>"]/g;return a.escape=r,a.rethrow=function n(t,e,r,a){if(!(t instanceof Error))throw t;if(!("undefined"==typeof window&&e||a))throw t.message+=" on line "+r,t;try{a=a||require("fs").readFileSync(e,"utf8")}catch(e){n(t,null,r)}var i=3,o=a.split("\n"),s=Math.max(r-i,0),f=Math.min(o.length,r+i),i=o.slice(s,f).map(function(n,t){var e=t+s+1;return(e==r?"  > ":"    ")+e+"| "+n}).join("\n");throw t.path=e,t.message=(e||"Jade")+":"+r+"\n"+i+"\n\n"+t.message,t},a.DebugItem=function(n,t){this.lineno=n,this.filename=t},a}(); 
 
     var templatizer = {};
     templatizer["blocks"] = {};
-    templatizer["includes"] = {};
     templatizer["modals"] = {};
     templatizer["pages"] = {};
     templatizer["sidebars"] = {};
-    templatizer["tmp"] = {};
     templatizer["widgets"] = {};
 
     // blocks/EditorItem.jade compiled template
@@ -92,19 +25,19 @@
         var jade_mixins = {};
         var jade_interp;
         var locals_for_with = locals || {};
-        (function (model) {
+        (function(model) {
             switch (model.type) {
-                case "text":
-                    buf.push('<span class="item">' + jade.escape((jade_interp = model.text) == null ? "" : jade_interp) + "</span>");
-                    break;
+              case "text":
+                buf.push('<span class="item">' + jade.escape((jade_interp = model.text) == null ? "" : jade_interp) + "</span>");
+                break;
 
-                case "item":
-                    buf.push("<strong" + jade.attr("data-id", "" + model.id + "", true, false) + ' class="item">' + jade.escape((jade_interp = model.text) == null ? "" : jade_interp) + "</strong>");
-                    break;
+              case "item":
+                buf.push("<strong" + jade.attr("data-id", "" + model.id + "", true, false) + ' class="item">' + jade.escape((jade_interp = model.text) == null ? "" : jade_interp) + "</strong>");
+                break;
 
-                default:
-                    buf.push('""');
-                    break;
+              default:
+                buf.push('""');
+                break;
             }
         }).call(this, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined);
         return buf.join("");
@@ -116,10 +49,15 @@
         var jade_mixins = {};
         var jade_interp;
         var locals_for_with = locals || {};
-        (function (model) {
-            buf.push('<a data-hook="asset"' + jade.attr("data-id", "" + model.id + "", true, false) + ' class="ui label"><i class="pref_icon"></i><span class="name">' + jade.escape((jade_interp = model.name) == null ? "" : jade_interp) + '</span><i class="suff_icon"></i></a>');
+        (function(model) {
+            buf.push('<a data-hook="asset"' + jade.attr("data-id", "" + model.id + "", true, false) + ' class="ui label"><i data-hook="pref_icon"></i><span class="name">' + jade.escape((jade_interp = model.name) == null ? "" : jade_interp) + '</span><i data-hook="suff_icon"></i></a>');
         }).call(this, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined);
         return buf.join("");
+    };
+
+    // blocks/assetState.jade compiled template
+    templatizer["blocks"]["assetState"] = function tmpl_blocks_assetState() {
+        return '<div class="ui two columns grid"><div class="column"><strong>State:</strong><span data-hook="assetState" class="ui label"></span></div><div class="column"><div data-hook="assetControlBtn" class="ui mini button">ControlButton</div></div></div>';
     };
 
     // blocks/editor.jade compiled template
@@ -129,7 +67,24 @@
 
     // blocks/editorMenu.jade compiled template
     templatizer["blocks"]["editorMenu"] = function tmpl_blocks_editorMenu() {
-        return '<div id="previewMenu"><div id="editorHeader" class="ui tiered menu"><div class="menu"><a data-tab="annotate" class="active item"><i class="lab icon"></i>Annotate</a><a data-tab="save" class="item"><i class="save icon"></i>Save</a><a data-tab="manage" class="item"><i class="content basic icon"></i>Manage</a><div class="right menu"><a data-hook="button" data-action="quickBtn" class="item nonebtn"><i class="mail icon"></i>Quick Test Button</a></div></div><div data-tab="annotate" class="ui small secondary menu active tab"><a data-hook="button" data-action="annotate" class="item">Annotate</a><a data-hook="button" data-action="annotateSelection" class="item">Annotate Selected</a><a data-hook="button" data-action="loadLocalFile" class="item"><i class="icon disk outline"></i>Local File</a><div data-hook="dropBase" class="ui dropdown link item"><i class="cloud download icon"></i><div class="text">Example Files</div><i class="icon dropdown"></i><div data-hook="dropItems" class="menu"></div></div></div><div data-tab="save" class="ui small secondary menu tab"><a data-hook="button" data-action="saveJSON" data-arg="json" class="item">JSON</a><a data-hook="button" data-action="saveXML" data-arg="xml" class="item">XML</a><a data-hook="button" data-action="saveYAMLt" data-arg="yaml" class="item">YAML</a></div><div data-tab="manage" class="ui small secondary menu tab"><a data-hook="button" data-action="manageEntities" class="item">Entities</a><a data-hook="button" data-action="showToolkit" class="item">Assets &amp; Tools</a><a data-hook="button" data-action="manageImages" class="item">Images</a></div></div></div>';
+        return '<div id="previewMenu"><div id="editorHeader"><div class="ui top attached menu"><a data-tab="annotate" class="active item"><i class="lab icon"></i>Annotate</a><a data-tab="save" class="item"><i class="save icon"></i>Save</a><a data-tab="manage" class="item"><i class="content basic icon"></i>Manage</a><div class="right menu"><div class="item">Cursor position:<div data-hook="cursorPos">0</div></div></div></div><div data-tab="annotate" class="ui active tab"><div class="ui small secondary menu"><a data-hook="button" data-action="annotate" class="item">Annotate</a><a data-hook="button" data-action="annotateSelection" class="item">Annotate Selected</a><a data-hook="button" data-action="loadLocalFile" class="item"><i class="icon disk outline"></i>Local File</a><div data-hook="dropBase" class="ui dropdown link item"><i class="cloud download icon"></i><div class="text">Example Files</div><i class="icon dropdown"></i><div data-hook="dropItems" class="menu"></div></div></div></div><div data-tab="save" class="ui tab"><div class="ui small secondary menu"><a data-hook="button" data-action="saveJSON" data-arg="json" class="item">JSON</a><a data-hook="button" data-action="saveXML" data-arg="xml" class="item">XML</a><a data-hook="button" data-action="saveYAMLt" data-arg="yaml" class="item">YAML</a></div></div><div data-tab="manage" class="ui tab"><div class="ui small secondary menu"><a data-hook="button" data-action="manageEntities" class="item">Entities</a><a data-hook="button" data-action="showAssetManager" class="item">Assets &amp; Tools</a><a data-hook="button" data-action="manageImages" class="item">Images</a></div></div></div></div>';
+    };
+
+    // blocks/entityFilter.jade compiled template
+    templatizer["blocks"]["entityFilter"] = function tmpl_blocks_entityFilter() {
+        return '<div id="entityFilterPopup" style="top: 554px; left: 1px; bottom: auto; right: auto; width: 460px;" class="ui flowing popup transition hidden"><div class="ui center aligned"><div class="ui labeled segment"><div class="ui top left attached label">Filters</div><div data-hook="groupFilters" class="ui labels"></div><div class="ui bottom right attached label"><div class="ui small basic icon buttons"><button data-action="check_all" class="ui button"><i class="checkmark box icon"></i></button><button data-action="toggle" class="ui button"><i class="refresh icon"></i></button><button data-action="uncheck_all" class="ui button"><i class="square outline icon"></i></button></div></div></div><div class="ui labeled segment"><div class="ui top left attached label">Scope</div><div id="filterScope"><button data-scope="editor" class="ui toggle button scope active">Editor</button><button data-scope="entities" class="ui toggle button scope active">Entites</button></div></div></div></div>';
+    };
+
+    // blocks/entityFilterItem.jade compiled template
+    templatizer["blocks"]["entityFilterItem"] = function tmpl_blocks_entityFilterItem(locals) {
+        var buf = [];
+        var jade_mixins = {};
+        var jade_interp;
+        var locals_for_with = locals || {};
+        (function(model) {
+            buf.push('<div class="inline field"><div' + jade.attr("id", "chckbox-" + model.prefix + "", true, false) + ' class="ui checkbox filter"><input type="checkbox" class="hidden"/><label><strong class="item">' + jade.escape((jade_interp = model.name) == null ? "" : jade_interp) + "</strong></label></div></div>");
+        }).call(this, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined);
+        return buf.join("");
     };
 
     // blocks/entityInfo.jade compiled template
@@ -138,15 +93,15 @@
         var jade_mixins = {};
         var jade_interp;
         var locals_for_with = locals || {};
-        (function (Array, model, preview, undefined) {
+        (function(Array, model, preview, undefined) {
             buf.push('<div id="rightTop"><div id="entityInfoHeader" class="ui inverted teal menu"><div class="title item"><i class="info icon"> </i>Textual Entity Information</div><div class="icon menu right">');
             var disabled = model.entitySelected && model.entitySelected.others && model.entitySelected.others.length > 1 ? "" : "disabled";
-            buf.push('<a data-hook="showBar"' + jade.cls(["item " + disabled + ""], [true]) + '><i class="list layout icon"></i></a></div></div><div id="entityInfoContent">');
+            buf.push('<a data-hook="showBar"' + jade.cls([ "item " + disabled + "" ], [ true ]) + '><i class="list layout icon"></i></a></div></div><div id="entityInfoContent">');
             if (model.entitySelected != null && model.entitySelected.preferred != null) {
                 var kbid = preview || model.entitySelected.preferred;
                 var kb = model.entitySelected.kb_ref[kbid];
                 buf.push("<ul>");
-                (function () {
+                (function() {
                     var $obj = kb.data;
                     if ("number" == typeof $obj.length) {
                         for (var column = 0, $l = $obj.length; column < $l; column++) {
@@ -185,21 +140,21 @@
     templatizer["blocks"]["entityInfo"]["gender"] = function tmpl_blocks_entityInfo_gender(g) {
         var block = this && this.block, attributes = this && this.attributes || {}, buf = [];
         switch (g) {
-            case "M":
-                buf.push(jade.escape(null == (jade_interp = "Male") ? "" : jade_interp));
-                break;
+          case "M":
+            buf.push(jade.escape(null == (jade_interp = "Male") ? "" : jade_interp));
+            break;
 
-            case "F":
-                buf.push(jade.escape(null == (jade_interp = "Female") ? "" : jade_interp));
-                break;
+          case "F":
+            buf.push(jade.escape(null == (jade_interp = "Female") ? "" : jade_interp));
+            break;
 
-            case "U":
-                buf.push(jade.escape(null == (jade_interp = "Unknown") ? "" : jade_interp));
-                break;
+          case "U":
+            buf.push(jade.escape(null == (jade_interp = "Unknown") ? "" : jade_interp));
+            break;
 
-            case "O":
-                buf.push(jade.escape(null == (jade_interp = "Others") ? "" : jade_interp));
-                break;
+          case "O":
+            buf.push(jade.escape(null == (jade_interp = "Others") ? "" : jade_interp));
+            break;
         }
         return buf.join("");
     };
@@ -211,41 +166,41 @@
         if (dataplus != null && dataplus.hasOwnProperty(column)) {
             var dplus = dataplus[column];
             switch (dplus.type) {
-                case "url":
-                    buf.push("<a" + jade.attr("href", "" + dplus.data + "" + data + "", true, false) + ' target="_blank">');
-                    buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
-                    buf.push("</a>");
-                    break;
+              case "url":
+                buf.push("<a" + jade.attr("href", "" + dplus.data + "" + data + "", true, false) + ' target="_blank">');
+                buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
+                buf.push("</a>");
+                break;
 
-                case "image":
-                    buf.push("<a" + jade.attr("href", "" + dplus.data + "" + data + "", true, false) + ' target="_blank">');
-                    buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
-                    buf.push("</a>");
-                    break;
+              case "image":
+                buf.push("<a" + jade.attr("href", "" + dplus.data + "" + data + "", true, false) + ' target="_blank">');
+                buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
+                buf.push("</a>");
+                break;
 
-                default:
-                    buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
-                    break;
+              default:
+                buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
+                break;
             }
         } else {
             switch (column) {
-                case "type":
-                    buf.push("" + jade.escape((jade_interp = data) == null ? "" : jade_interp) + '<span class="coref"></span>');
-                    break;
+              case "type":
+                buf.push("" + jade.escape((jade_interp = data) == null ? "" : jade_interp) + '<span class="coref"></span>');
+                break;
 
-                case "gender":
-                    buf.push(templatizer["blocks"]["entityInfo"]["gender"](data));
-                    break;
+              case "gender":
+                buf.push(templatizer["blocks"]["entityInfo"]["gender"](data));
+                break;
 
-                default:
-                    if (column.endsWith("url")) {
-                        buf.push("<a" + jade.attr("href", "" + data + "", true, false) + ' target="_blank">');
-                        buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
-                        buf.push("</a>");
-                    } else {
-                        buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
-                    }
-                    break;
+              default:
+                if (column.endsWith("url")) {
+                    buf.push("<a" + jade.attr("href", "" + data + "", true, false) + ' target="_blank">');
+                    buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
+                    buf.push("</a>");
+                } else {
+                    buf.push(templatizer["blocks"]["entityInfo"]["finalize"](data));
+                }
+                break;
             }
         }
         return buf.join("");
@@ -258,7 +213,7 @@
         buf.push("<li><strong>" + jade.escape(null == (jade_interp = column + ":  ") ? "" : jade_interp) + "</strong>");
         if (Array.isArray(data)) {
             var y;
-            (function () {
+            (function() {
                 var $obj = data;
                 if ("number" == typeof $obj.length) {
                     for (var i = 0, $l = $obj.length; i < $l; i++) {
@@ -289,7 +244,7 @@
 
     // blocks/entityList.jade compiled template
     templatizer["blocks"]["entityList"] = function tmpl_blocks_entityList() {
-        return "<div id=\"leftBottom\">   <div id=\"entityListHeader\" class=\"ui purple inverted menu\"><div class=\"title item\"><i class=\"list icon\"> </i>Entities</div><!--div(class='ui icon buttons right menu purple inverted')div(class='ui button popup item' title='Sort' data-action='sort' data-arg='0')\n    i( class='sort icon')\ndiv(class='ui top right pointing dropdown button' id='entityFilter')\n    i( class='filter icon')\n    div(class='menu' )\n        div(class='ui grid celled')\n            div(class='one wide column' id='pickerBox')\n                div(id='colorPicker')\n            div(class='three wide column')\n                table(class='ui table collapsing compact small' id='entityFilterList')\n                div(class='3 ui buttons mini fluid')\n                    div(class='ui positive enable button')\n                        Enable All\n                    div(class='ui toggle button')\n                        Toggle All\n                    div(class='ui negative disable button')\n                        Disable All\ndiv(class='ui top right pointing button')\n    i( class='settings icon')\n    div(class='menu')--><div class=\"icon menu right\"><a data-hook=\"button\" data-action=\"sort\" class=\"item\"><i class=\"sort icon\"></i><div class=\"ui flowing popup\"><div class=\"ui three column divided equal height center aligned grid\"><div class=\"column\">YOLOOL</div></div></div></a><a data-hook=\"button\" data-action=\"filter\" class=\"item\"><i class=\"filter icon\"></i></a><a data-hook=\"button\" data-action=\"settings\" class=\"item\"><i class=\"settings icon\"></i></a></div></div><div id=\"entityListContent\" data-hook=\"entityList\"></div></div>";
+        return '<div id="leftBottom"><div id="entityListHeader" class="ui blue inverted menu"><div class="title item"><i class="list icon"></i>Entities</div><div class="icon menu right"><a data-hook="button" data-action="sort" class="item"><i data-hook="sortIcon" class="icon"></i></a><a data-hook="button" data-action="filter" class="item"><i class="filter icon"></i></a><a data-hook="button" data-action="settings" class="item"><i class="settings icon"></i></a></div></div><div id="entityListContent" data-hook="entityList"></div></div>';
     };
 
     // blocks/entityListItem.jade compiled template
@@ -298,8 +253,8 @@
         var jade_mixins = {};
         var jade_interp;
         var locals_for_with = locals || {};
-        (function (model) {
-            buf.push("<span" + jade.cls(["alabel bg-" + model.group + ""], [true]) + ">" + jade.escape((jade_interp = model.bestText) == null ? "" : jade_interp) + "</span>");
+        (function(model) {
+            buf.push("<span" + jade.cls([ "alabel bg-" + model.group + "" ], [ true ]) + ">" + jade.escape((jade_interp = model.bestText) == null ? "" : jade_interp) + "</span>");
         }).call(this, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined);
         return buf.join("");
     };
@@ -310,7 +265,7 @@
         var jade_mixins = {};
         var jade_interp;
         var locals_for_with = locals || {};
-        (function (model) {
+        (function(model) {
             buf.push('<div class="card kbitem"><div class="content segment blue"><span class="ui right ribbon label blue">Preferred</span><span class="header">' + jade.escape((jade_interp = model.bestText) == null ? "" : jade_interp) + '</span><span class="meta">' + jade.escape((jade_interp = model.data.type) == null ? "" : jade_interp) + '</span><div class="description">' + jade.escape((jade_interp = model.descPrev()) == null ? "" : jade_interp) + '</div><span class="extra">' + jade.escape((jade_interp = model.data.id) == null ? "" : jade_interp) + "</span></div></div>");
         }).call(this, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined);
         return buf.join("");
@@ -322,20 +277,51 @@
         var jade_mixins = {};
         var jade_interp;
         var locals_for_with = locals || {};
-        (function (model) {
+        (function(model) {
             buf.push('<button data-hook="tool"' + jade.attr("data-id", "" + model.name + "", true, false) + ' class="ui button">' + jade.escape((jade_interp = model.nameNormalized) == null ? "" : jade_interp) + "</button>");
         }).call(this, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined);
         return buf.join("");
     };
 
+    // blocks/toolSwitches.jade compiled template
+    templatizer["blocks"]["toolSwitches"] = function tmpl_blocks_toolSwitches(locals) {
+        var buf = [];
+        var jade_mixins = {};
+        var jade_interp;
+        var locals_for_with = locals || {};
+        (function(model, undefined) {
+            buf.push('<div class="ui form"><div class="inline fields">');
+            if (model.tool_selected != null) {
+                (function() {
+                    var $obj = model.tool_selected.switches;
+                    if ("number" == typeof $obj.length) {
+                        for (var chname = 0, $l = $obj.length; chname < $l; chname++) {
+                            var chstate = $obj[chname];
+                            buf.push('<div class="field"><div class="ui checkbox"><input type="checkbox"' + jade.attr("name", chname, true, false) + jade.attr("checked", chstate, true, false) + "/><label>" + jade.escape(null == (jade_interp = chname) ? "" : jade_interp) + "</label></div></div>");
+                        }
+                    } else {
+                        var $l = 0;
+                        for (var chname in $obj) {
+                            $l++;
+                            var chstate = $obj[chname];
+                            buf.push('<div class="field"><div class="ui checkbox"><input type="checkbox"' + jade.attr("name", chname, true, false) + jade.attr("checked", chstate, true, false) + "/><label>" + jade.escape(null == (jade_interp = chname) ? "" : jade_interp) + "</label></div></div>");
+                        }
+                    }
+                }).call(this);
+            }
+            buf.push("</div></div>");
+        }).call(this, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined, "undefined" in locals_for_with ? locals_for_with.undefined : typeof undefined !== "undefined" ? undefined : undefined);
+        return buf.join("");
+    };
+
     // blocks/visualInfo.jade compiled template
     templatizer["blocks"]["visualInfo"] = function tmpl_blocks_visualInfo() {
-        return '<div id="rightBottom">   <div id="carouselHeader" class="ui green inverted menu "><div class="title item"><i class="photo icon"></i>Visual Entity Information</div><div class="icon menu right"><a title="a" data-hook="prevImage" class="item"><i class="angle left icon"></i></a><div id="imgCounter" class="item"><b data-hook="counter">-/-</b></div><a data-hook="nextImage" class="item"><i class="angle right icon"></i></a></div></div><div id="carouselContent"><div id="carouselImageList"><img data-hook="carouselImg"/></div></div></div>';
+        return '<div id="rightBottom">   <div id="carouselHeader" class="ui green inverted menu "><div class="title item"><i class="photo icon"></i>Visual Entity Information</div><div class="icon menu right"><a title="a" data-hook="prevImage" class="item"><i class="angle left icon"></i></a><div id="imgCounter" class="item"><b data-hook="counter">-/-</b></div><a data-hook="nextImage" class="item"><i class="angle right icon"></i></a></div></div><div id="carouselContent"><div id="carouselImageList" data-hook="carousel"><img data-hook="carouselImg"/></div><div class="notFound hidden"><div class="ui center aligned icon header"><i class="grey huge icons"><!--i.big.dont.icon--><i class="file image outline icon"></i></i><div class="content">404 - Not Found</div></div></div></div></div>';
     };
 
     // body.jade compiled template
     templatizer["body"] = function tmpl_body() {
-        return '<body><div data-hook="pageSidebar" id="pageSidebar" class="ui sidebar left vertical styled very wide segment"></div><div data-hook="pageSidebar2" id="pageSidebar2" class="ui sidebar right vertical styled wide segment"></div><div id="fixedHeader" class="ui top fixed inverted black main menu"><div id="headerMenu" class="container"><div class="title item"><b>Decipher NERC</b></div><div class="right menu"><a data-content="Preview Mode" data-type="nav" href="/preview" class="popup icon item active"><i class="unhide icon"></i></a><a data-content="Annotation Mode" data-type="nav" href="/annotator" class="popup icon item"><i class="edit icon"></i></a><a data-content="Application Settings" data-type="nav" href="/settings" class="popup icon item"><i class="settings icon"></i></a></div></div></div><div id="panelWrapper" data-hook="page-container" class="ui transition pusher"></div><div id="pageDimmer" class="ui page dimmer"><div class="content"><div class="center"><div class="ui text large loader">Loading...<h2>Welcome! Graphical interface is about to loading!</h2><div class="sub header">Please wait till its complete.</div></div></div></div></div><div data-hook="pageModals"></div></body>';
+        return '<body><div data-hook="pageSidebar" id="pageSidebar" class="ui left very wide sidebar"></div><div data-hook="pageSidebar2" id="pageSidebar2" class="ui right wide sidebar"></div><div id="fixedHeader" class="ui top fixed inverted black main menu"><div id="headerMenu" class="container"><div class="title item"><b>Decipher NERC</b></div><div class="right menu"><a data-content="Preview Mode" data-type="nav" href="/preview" class="popup icon item active"><i class="unhide icon"></i></a><a data-content="Annotation Mode" data-type="nav" href="/annotator" class="popup icon item"><i class="edit icon"></i></a><a data-content="Application Settings" data-type="nav" href="/settings" class="popup icon item"><i class="settings icon"></i></a></div></div></div><div id="panelWrapper" data-hook="page-container" class="ui transition pusher"></div><div id="pageDimmer" class="ui page dimmer"><div class="content"><div class="center"><div class="ui text large loader">Loading...<h2>Welcome! Graphical interface is about to loading!</h2><div class="sub header">Please wait till its complete.</div></div></div></div></div><div data-hook="pageModals"></div><div data-hook="pagePopups"></div></body>';
     };
 
     // head.jade compiled template
@@ -343,19 +329,9 @@
         return '<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/><meta name="apple-mobile-web-app-capable" content="yes"/>';
     };
 
-    // includes/formInput.jade compiled template
-    templatizer["includes"]["formInput"] = function tmpl_includes_formInput() {
-        return '<div class="form-group"><label data-hook="label"></label><div data-hook="message-container"><div data-hook="message-text" class="alert alert-danger"></div></div><input class="form-control"/></div>';
-    };
-
-    // includes/person.jade compiled template
-    templatizer["includes"]["person"] = function tmpl_includes_person() {
-        return '<li class="person list-group-item container"><img data-hook="avatar" width="40" height="40"/><a data-hook="name"></a><span class="btn-group pull-right"> <a data-hook="action-edit" class="btn btn-default">edit </a><a href="#" data-hook="action-delete" class="btn btn-danger">delete</a></span></li>';
-    };
-
     // modals/assetManager.jade compiled template
     templatizer["modals"]["assetManager"] = function tmpl_modals_assetManager() {
-        return '<div data-hook="assetModal" class="ui large modal"><i class="close icon"></i><div class="header">Asset Manager</div><div class="content"><div class="ui internally celled grid"><div class="row"><div data-hook="toolbox" class="eight wide column"></div><div class="eight wide column"><div data-hook="assetbox" class="ui labels"></div></div></div><div class="row"><div data-hook="toolboxinfo" class="eight wide column"><p>Version:</p></div><div data-hook="assetboxinfo" class="eight wide column"><p>Version:</p></div></div></div></div><div class="actions"><div class="ui button">Close</div></div></div>';
+        return '<div data-hook="assetModal" class="ui large modal"><i class="close icon"></i><div class="header">Asset Manager</div><div class="content"><div class="ui internally celled grid"><div class="row"><div data-hook="toolbox" class="eight wide column"></div><div class="eight wide column"><div data-hook="assetbox" class="ui labels"></div></div></div><div class="row"><div class="eight wide column"><div data-hook="switches"></div><p>Version:<span data-hook="toolboxinfo"></span></p></div><div class="eight wide column"><div data-hook="states"></div><p>Version:<span data-hook="assetboxinfo"></span></p></div></div></div></div><div class="actions"><div id="closeButton" class="ui button">Close</div></div></div>';
     };
 
     // pages/annotator.jade compiled template
@@ -363,39 +339,9 @@
         return '<div class="ui"><h1>This is annotator.</h1></div>';
     };
 
-    // pages/collectionDemo.jade compiled template
-    templatizer["pages"]["collectionDemo"] = function tmpl_pages_collectionDemo() {
-        return '<section class="page pageOne"><h2>Collection demo</h2><p>Intelligently rendering collections can be a bit tricky. </p><p><a href="https://github.com/ampersandjs/ampersand-view">ampersand-view\'s</a> <code>renderCollection()</code> method makes it simple.</p><p>The only code required to manage the collection is:</p><pre><code>this.renderCollection(\n   this.collection, \n   PersonView, \n   this.queryByHook(\'people-list\')\n);</code></pre><h3>People container:</h3><ul data-hook="people-list" class="list-group"></ul><p>Try it by clicking the buttons</p><div class="buttons btn-group"><button data-hook="reset" class="btn btn-default">.reset() </button><button data-hook="fetch" class="btn btn-default">.fetch() </button><button data-hook="shuffle" class="btn btn-default">.shuffle() </button><button data-hook="add" class="btn btn-default">.addRandom()</button><a href="/person/add" class="btn btn-default">Add Person</a></div><p>Events are always managed so you don\'t get any leaks.</p></section>';
-    };
-
-    // pages/home.jade compiled template
-    templatizer["pages"]["home"] = function tmpl_pages_home() {
-        return '<section class="page home"><h2>Welcome to a skeleton for annotator</h2><p>If you "view source" you\'ll see it\'s 100% client rendered.</p><p>Click around the site using the nav bar at the top. </p><p>Things to note:<ul><li>The url changes, no requests are made to the server.</li><li>Refreshing the page will always get you back to the same page</li><li>Page changes are nearly instantaneous</li><li>In development mode, you don\'t need to restart the server to see changes, just edit and refresh.</li><li>In production mode, it will serve minfied, uniquely named files with super agressive cache headers. To test:<ul> <li>in dev_config.json set <code>isDev</code> to <code>false</code>.</li><li>restart the server.</li><li>view source and you\'ll see minified css and js files with unique names.</li><li>open the "network" tab in chrome dev tools (or something similar). You\'ll also want to make sure you haven\'t disabled your cache.</li><li>without hitting "refresh" load the app again (selecting current URL in url bar and hitting "enter" works great).</li><li>you should now see that the JS and CSS files were both served from cache without making any request to the server at all.</li></ul></li></ul></p></section>';
-    };
-
-    // pages/info.jade compiled template
-    templatizer["pages"]["info"] = function tmpl_pages_info() {
-        return '<section class="page pageTwo"><h2>Simple Page Example</h2><p>This page was rendered by a simple page view file at client/pages/info.js.</p></section>';
-    };
-
-    // pages/personAdd.jade compiled template
-    templatizer["pages"]["personAdd"] = function tmpl_pages_personAdd() {
-        return '<section class="page add-person"><h2>Add Person</h2><p>This form and all behavior is defined by the form view in <code>client/forms/person.js</code>.</p><p>The same form-view is used for both editing and creating new users.</p><form data-hook="person-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn">Submit</button></div></form></section>';
-    };
-
-    // pages/personEdit.jade compiled template
-    templatizer["pages"]["personEdit"] = function tmpl_pages_personEdit() {
-        return '<section class="page edit-person"><h2>Edit Person</h2><p>This form and all behavior is defined by the form view in <code>client/forms/person.js</code>.</p><p>The same form-view is used for both editing and creating new users.</p><form data-hook="person-form"><fieldset data-hook="field-container"></fieldset><div class="buttons"><button data-hook="reset" type="submit" class="btn">Submit</button></div></form></section>';
-    };
-
-    // pages/personView.jade compiled template
-    templatizer["pages"]["personView"] = function tmpl_pages_personView() {
-        return '<section class="page view-person"><h2 data-hook="name"></h2><img data-hook="avatar" width="80" height="80"/><div class="buttons"><a data-hook="edit" class="btn">Edit</a><button data-hook="delete" class="btn">Delete</button></div></section>';
-    };
-
     // pages/preview.jade compiled template
     templatizer["pages"]["preview"] = function tmpl_pages_preview() {
-        return '<div class="ui celled grid"><div data-hook="leftColumn" class="ten wide middle column"><div data-hook="menu"></div><div data-hook="editor"></div><div data-hook="entityList"></div></div><div data-hook="rightColumn" class="six wide right column"><div data-hook="entityInfo"></div><div data-hook="visualInfo"></div></div></div>';
+        return '<div class="ui celled grid"><div data-hook="leftColumn" class="ten wide middle column"><div data-hook="menu"></div><div data-hook="editor"></div><div data-hook="entityList"></div></div><div data-hook="rightColumn" class="six wide right column"><div data-hook="entityInfo"></div><div data-hook="visualInfo"></div></div><div data-hook="previewPopups"></div></div>';
     };
 
     // pages/settings.jade compiled template
@@ -403,93 +349,21 @@
         return "<h1>This is settings</h1>";
     };
 
-    // sidebars/assets.bkp compiled template
+    // sidebars/assets.jade compiled template
     templatizer["sidebars"]["assets"] = function tmpl_sidebars_assets(locals) {
         var buf = [];
         var jade_mixins = {};
         var jade_interp;
         var locals_for_with = locals || {};
-        (function (asset, model, tool, undefined) {
-            buf.push('<div><h3 class="ui header center aligned"><i class="icon archive"></i>Assets &amp; Tools Manager</h3><div class="ui divider"></div><div class="ui form"><div class="field"><label>Available Tools:</label><div id="toolList" class="ui selection dropdown fluid"><input name="tool" type="hidden" value="ner"/><div class="default text">Please select your favorite tool</div><i class="dropdown icon"></i><div id="toolListInternal" class="menu ui transition hidden">');
-            n = 0;
-            while (n < model.tools.length) {
-                tool = model.tools.at(n++);
-                buf.push("<div" + jade.attr("data-value", "" + tool.name + "", true, false) + ' class="item">' + jade.escape((jade_interp = tool.nameNormalized) == null ? "" : jade_interp) + "</div>");
-            }
-            buf.push('</div></div></div><div id="toolError" class="ui red pointing above ui label fluid hidden">Please select a tool!</div><div>Tool version:<div id="tool_version">');
-            if (model.tool_selected != null) {
-                buf.push("" + jade.escape((jade_interp = model.tool_selected.version) == null ? "" : jade_interp) + "");
-            }
-            buf.push('</div></div><div class="ui divider"></div><div class="ui form"><div class="field"><label>Tool Parameters:</label><div id="toolParams">');
-            var n = 0;
-            if (model.tool_selected != null) {
-                (function () {
-                    var $obj = model.tool_selected.params;
-                    if ("number" == typeof $obj.length) {
-                        for (var $index = 0, $l = $obj.length; $index < $l; $index++) {
-                            var param = $obj[$index];
-                            buf.push('<div class="ui checkbox"><input type="checkbox" name="params"' + jade.attr("value", "" + param + "", true, false) + "/><label>" + jade.escape((jade_interp = param) == null ? "" : jade_interp) + "</label></div>");
-                        }
-                    } else {
-                        var $l = 0;
-                        for (var $index in $obj) {
-                            $l++;
-                            var param = $obj[$index];
-                            buf.push('<div class="ui checkbox"><input type="checkbox" name="params"' + jade.attr("value", "" + param + "", true, false) + "/><label>" + jade.escape((jade_interp = param) == null ? "" : jade_interp) + "</label></div>");
-                        }
-                    }
-                }).call(this);
-            }
-            buf.push('</div></div></div><div class="ui divider"></div><div class="field"><label>Assets Controll:</label><table class="ui table definition small compact center aligned"><thead><tr><th class="collapsing">&nbsp;</th><th>Name</th><th>Type</th><th>Tool</th><th class="collapsing"><abbr title="Status"><i class="icon off"></i></abbr></th><th class="collapsing"><abbr title="Control"><i class="icon cloud"></i></abbr></th></tr></thead><tbody id="assetTable">');
-            n = 0;
-            while (n < model.assets.length) {
-                asset = model.assets.at(n++);
-                buf.push("<tr><td>");
-                if (asset.selected) {
-                    buf.push('<input name="assets" type="radio"' + jade.attr("value", "" + asset.id + "", true, false) + ' checked="checked"/>');
-                } else {
-                    buf.push('<input name="assets" type="radio"' + jade.attr("value", "" + asset.id + "", true, false) + "/>");
-                }
-                buf.push("</td><td>" + jade.escape((jade_interp = asset.name) == null ? "" : jade_interp) + "</td><td>" + jade.escape((jade_interp = asset.type) == null ? "" : jade_interp) + "</td><td>" + jade.escape((jade_interp = asset.tools) == null ? "" : jade_interp) + "</td><td><i" + jade.cls(["" + asset.statusIcon + " icon"], [true]) + "></i></td><td><i" + jade.attr("data-value", "" + asset.id + "", true, false) + jade.cls(["" + asset.controlIcon + " icon"], [true]) + "></i></td></tr>");
-            }
-            buf.push('</tbody><tfoot class="ui transition hidden"><tr><th colspan="6"><div><ul><li>Name:</li><li>Description</li><li>Type:</li><li>Tools:</li><li>Status:</li><li>Control:</li><li>Parts:</li></ul></div></th></tr></tfoot></table><div id="assetError" class="ui red pointing above ui label fluid hidden">Please select an asset!</div><div>Asset Version:<span id="asset_version"></span>');
-            if (model.asset_selected != null) {
-                buf.push("" + jade.escape((jade_interp = model.asset_selected.version) == null ? "" : jade_interp) + "");
-            }
-            buf.push('</div></div><div data-hook="hide" class="ui green fluid button"><i class="left icon"></i>Hide</div></div></div>');
-        }).call(this, "asset" in locals_for_with ? locals_for_with.asset : typeof asset !== "undefined" ? asset : undefined, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined, "tool" in locals_for_with ? locals_for_with.tool : typeof tool !== "undefined" ? tool : undefined, "undefined" in locals_for_with ? locals_for_with.undefined : typeof undefined !== "undefined" ? undefined : undefined);
-        return buf.join("");
-    };
-
-    // sidebars/assets_pokus.jade compiled template
-    templatizer["sidebars"]["assets_pokus"] = function tmpl_sidebars_assets_pokus(locals) {
-        var buf = [];
-        var jade_mixins = {};
-        var jade_interp;
-        var locals_for_with = locals || {};
-        (function (asset, model, n) {
-            buf.push('<div><h3 class="ui header center aligned"><i class="icon archive"></i>Assets &amp; Tools Manager</h3><div class="ui divider"></div><div class="ui form"><div class="field"><label>Available Tools:</label><div class="ui list horizontal"><div class="ui item"><div class="ui content"><div class="ui button inverted blue fluid">NER</div></div></div><div class="ui item"><div class="ui content"><div class="ui button inverted blue fluid">NER</div></div></div><div class="ui item"><div class="ui content"><div class="ui button inverted blue fluid">NER</div></div></div><div class="ui item"><div class="ui content"><div class="ui button inverted blue fluid">NER</div></div></div><div class="ui item"><div class="ui content"><div class="ui button inverted blue fluid">NER</div></div></div><div class="ui item"><div class="ui content"><div class="ui button inverted blue fluid">NER</div></div></div><div class="ui item"><div class="ui content"><div class="ui button inverted blue fluid">NER</div></div></div><div class="ui item"><div class="ui content"><div class="ui button inverted blue fluid">NER</div></div></div><div class="ui item"><div class="ui content"><div class="ui button inverted blue fluid">NER</div></div></div></div></div><div id="toolError" class="ui red pointing above ui label fluid">Please select a tool!</div><div class="ui divider"></div><div class="ui form"><div class="field"><label>Tool Parameters:</label><div id="toolParams">');
-            n = 0;
-            buf.push('</div></div></div><div class="ui divider"></div><div class="field"><label>Assets Controll:</label><table class="ui table definition small compact center aligned"><thead><tr><th class="collapsing">&nbsp;</th><th>Name</th><th>Type</th><th>Tool</th><th class="collapsing"><abbr title="Status"><i class="icon off"></i></abbr></th><th class="collapsing"><abbr title="Control"><i class="icon cloud"></i></abbr></th></tr></thead><tbody id="assetTable">');
-            n = 0;
-            while (n < model.assets.length) {
-                asset = model.assets.at(n++);
-                buf.push("<tr><td>");
-                if (asset.selected) {
-                    buf.push('<input name="assets" type="radio"' + jade.attr("value", "" + asset.name + "", true, false) + ' checked="checked"/>');
-                } else {
-                    buf.push('<input name="assets" type="radio"' + jade.attr("value", "" + asset.name + "", true, false) + "/>");
-                }
-                buf.push("</td><td>" + jade.escape((jade_interp = asset.name) == null ? "" : jade_interp) + "</td><td>" + jade.escape((jade_interp = asset.type) == null ? "" : jade_interp) + "</td><td>" + jade.escape((jade_interp = asset.tools) == null ? "" : jade_interp) + "</td><td><i" + jade.cls(["" + asset.statusIcon + " icon"], [true]) + "></i></td><td><i" + jade.cls(["" + asset.controlIcon + " icon"], [true]) + "></i></td></tr>");
-            }
-            buf.push('</tbody><tfoot class="ui transition hidden"><tr><th colspan="6"><div><ul><li>Name:</li><li>Description</li><li>Type:</li><li>Tools:</li><li>Status:</li><li>Control:</li><li>Parts:</li></ul></div></th></tr></tfoot></table><div id="assetError" class="ui red pointing above ui label fluid">Please select an asset!</div></div><div data-hook="hide" class="ui green fluid button"><i class="left icon"></i>Hide</div></div></div>');
-        }).call(this, "asset" in locals_for_with ? locals_for_with.asset : typeof asset !== "undefined" ? asset : undefined, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined, "n" in locals_for_with ? locals_for_with.n : typeof n !== "undefined" ? n : undefined);
+        (function(asset, model, param, tool) {
+            buf.push("<!--possibly deprecated--><!--div(class=\"ui segment\")h3(class='ui header center aligned')\n    i(class='icon archive')\n    |Assets &amp; Tools Manager\ndiv(class='ui divider')\ndiv(class='ui form')\n    div(class='field')\n      label Available Tools:\n      div(class='ui selection dropdown fluid' id='toolList')\n            input(name='tool' type='hidden' value='ner')\n            div(class='default text') Please select your favorite tool\n            i(class='dropdown icon')\n            div(id='toolListInternal' class='menu ui transition hidden')\n                - n = 0\n                while n < model.tools.length\n                    - tool = model.tools.at(n++)\n                    div(class='item' data-value='" + jade.escape((jade_interp = tool.name) == null ? "" : jade_interp) + "') " + jade.escape((jade_interp = tool.nameNormalized) == null ? "" : jade_interp) + "\n\n    div(id='toolError' class='ui red pointing above ui label fluid hidden') Please select a tool!\n    div\n        | Tool version:\n        div(id=\"tool_version\")\n            if model.tool_selected != null\n                | " + jade.escape((jade_interp = model.tool_selected.version) == null ? "" : jade_interp) + "\n    div(class='ui divider')\n    div(class='ui form')\n        div(class='field')\n            label Tool Parameters:\n            div(id='toolParams')\n                - var n = 0;\n                if model.tool_selected != null\n                    each param in model.tool_selected.params\n                        div.ui.checkbox\n                            input(type=\"checkbox\" name=\"params\" value=\"" + jade.escape((jade_interp = param) == null ? "" : jade_interp) + '")\n                            label ' + jade.escape((jade_interp = param) == null ? "" : jade_interp) + "\n\n    div(class='ui divider')\n    div(class='field')\n        label Assets Controll:\n        table(class='ui table definition small compact center aligned')\n            thead\n                tr\n                    th(class=\"collapsing\") &nbsp;\n                    th Name\n                    th Type\n                    th Tool\n                    th(class=\"collapsing\")\n                        abbr(title='Status')\n                            i(class='icon off')\n                    th(class=\"collapsing\")\n                        abbr(title='Control')\n                            i(class='icon cloud')\n\n            tbody(id='assetTable')\n                - n = 0\n                while n < model.assets.length\n                    - asset = model.assets.at(n++)\n                    tr\n                        td\n                            if asset.selected\n                                input(name='assets' type='radio' value='" + jade.escape((jade_interp = asset.id) == null ? "" : jade_interp) + "' checked='checked')\n                            else\n                                input(name='assets' type='radio' value='" + jade.escape((jade_interp = asset.id) == null ? "" : jade_interp) + "')\n                        td " + jade.escape((jade_interp = asset.name) == null ? "" : jade_interp) + "\n                        td " + jade.escape((jade_interp = asset.type) == null ? "" : jade_interp) + "\n                        td " + jade.escape((jade_interp = asset.tools) == null ? "" : jade_interp) + "\n                        td\n                            i(class='" + jade.escape((jade_interp = asset.statusIcon) == null ? "" : jade_interp) + " icon')\n                        td\n                            i(class='" + jade.escape((jade_interp = asset.controlIcon) == null ? "" : jade_interp) + " icon' data-value=\"" + jade.escape((jade_interp = asset.id) == null ? "" : jade_interp) + "\")\n            tfoot(class='ui transition hidden')\n                tr\n                    th(colspan='6' class='')\n                        div\n                            ul\n                                li Name:\n                                li Description\n                                li Type:\n                                li Tools:\n                                li Status:\n                                li Control:\n                                li Parts:\n\n        div(id='assetError' class='ui red pointing above ui label fluid hidden') Please select an asset!\n        div\n            | Asset Version:\n            span(id=\"asset_version\")\n            if model.asset_selected != null\n                | " + jade.escape((jade_interp = model.asset_selected.version) == null ? "" : jade_interp) + "\n    div(class='ui green fluid button' data-hook='hide')\n        i(class='left icon')\n        |Hide-->");
+        }).call(this, "asset" in locals_for_with ? locals_for_with.asset : typeof asset !== "undefined" ? asset : undefined, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined, "param" in locals_for_with ? locals_for_with.param : typeof param !== "undefined" ? param : undefined, "tool" in locals_for_with ? locals_for_with.tool : typeof tool !== "undefined" ? tool : undefined);
         return buf.join("");
     };
 
     // sidebars/kblist.jade compiled template
     templatizer["sidebars"]["kblist"] = function tmpl_sidebars_kblist() {
-        return '<div data-hook="kbprev" class="ui divided cards"></div>';
+        return '<div data-hook="kbprev" class="ui centered cards"></div>';
     };
 
     // widgets/dropdown.jade compiled template
@@ -503,7 +377,7 @@
         var jade_mixins = {};
         var jade_interp;
         var locals_for_with = locals || {};
-        (function (model) {
+        (function(model) {
             buf.push('<a data-hook="button" data-action="getExampleFile"' + jade.attr("data-arg", "" + model.name + "", true, false) + ' class="item">' + jade.escape((jade_interp = model.name) == null ? "" : jade_interp) + "</a>");
         }).call(this, "model" in locals_for_with ? locals_for_with.model : typeof model !== "undefined" ? model : undefined);
         return buf.join("");
